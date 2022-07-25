@@ -1,0 +1,25 @@
+name: 'Datadog doploment notification'
+description: 'Notify datadog on a new deployment'
+inputs:
+  dd-api:
+    description: Datadog API Endpoint
+    required: true
+    default: https://api.datadoghq.eu/api/v1/events
+  dd-api-key:
+    description: Datadog API Key
+    required: true
+  version:
+    description: Version of the deployed application
+    required: true
+  service:
+    description: Service name of the application
+    required: true
+  text:
+    description: Text
+    required: false
+  tags:
+    description: Tags
+    required: false
+runs:
+  using: 'node16'
+  main: 'lib/index.js'
