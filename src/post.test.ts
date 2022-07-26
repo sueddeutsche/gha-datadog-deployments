@@ -57,3 +57,26 @@ it('should split and trim tags', () => {
     },
   })
 });
+
+it('should show text when defined', () => {
+  post({
+    ddApi: 'dummy-url',
+    ddApiKey: 'dummy-key',
+    version: 'v1',
+    service: 'service-name',
+    text: 'Hello World',
+    tags: '',
+  });
+
+  expect(gotPost).toHaveBeenCalledWith('dummy-url', {
+    json: {
+      text: '%%% \nHello World\n %%%',
+      tags: [],
+      title: `Deployment: service-name@v1`,
+      source_type_name: 'deployment',
+    },
+    headers: {
+      'dd-api-key': 'dummy-key',
+    },
+  })
+});
