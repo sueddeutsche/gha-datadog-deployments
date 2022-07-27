@@ -1,22 +1,15 @@
-# Datadog deployment notification
+# Datadog deployment event notification
 
-Send version metric to datadog.
+Send version event to datadog.
 
 ## Usage
 
 ```yaml
-jobs:
-  deploy:
-    name: Unit tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: npm ci
-      - uses: sueddeutsche/gha-datadog-deployments@main
-        with: 
-          dd-api-key: ${{ secrets.DD_API_KEY }}
-          service: some-service-name 
-          version: vX.Y.Z
-          text: 'Deployed version: ...'
-          tags: 'foo:bar, dummy:bla'
+- uses: sueddeutsche/gha-datadog-deployments@v0
+  with: 
+    dd-api-key: ${{ secrets.DATADOG_API_KEY }}
+    service: some-service-name
+    version: vX.Y.Z
+    text: 'Link: [Markdown link to Github](https://link.to.github/vX.Y.Z)'
+    tags: 'foo:bar, dummy:bla'
 ```
